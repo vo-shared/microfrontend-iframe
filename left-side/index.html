@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container m-0 p-0 h-100">
+            <div class="row w-100 h-100">
+                <ul class="list-group" style="width: 200px;">
+                    <li id="bar" class="list-group-item" onclick="toParent('bar')">Bar chart</li>
+                    <li id="line" class="list-group-item" onclick="toParent('line')">Line chart</li>
+                    <li id="radar" class="list-group-item" onclick="toParent('radar')">Radar chart</li>
+                    <li id="bubble" class="list-group-item" onclick="toParent('bubble')">Bubble chart</li>
+                    <li id="pie" class="list-group-item" onclick="toParent('pie')">Pie chart</li>
+                </ul>
+            </div>
+        </div>
+    <script>
+
+        function changeType(type){
+            const ctx = document.getElementById(type);
+            ctx.className += " active";
+        }
+
+        function toParent(type){
+            top.postMessage('chartType_'+type, '*');
+
+        }
+
+        const urlParams = new URLSearchParams(window.location.search);
+
+        const activeButton = urlParams.get('chartType');
+
+        changeType(activeButton);
+    </script>
+    </body>
+</html>
+

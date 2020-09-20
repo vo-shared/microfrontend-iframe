@@ -1,0 +1,48 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <div class="container m-0 p-0" style="height: 500px">
+            <div class="row h-100">
+                <div class=col-2>
+                    <iframe id="menu" width="100%" class="border-0 p-0 m-0" height="400px" src="http://localhost:2000?chartType=pie"></iframe>
+                </div>
+                <div class=col-10>
+                    <iframe id="chart-container" width="900px" class="border-0 p-0 m-0" height="400px" src="http://localhost:3000/?chartType=pie"></iframe>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Menu Iframe</label>
+                <div class="col-10 align-content-center">
+                    <input id="menu_url" class="form-control" type="text" placeholder="http://localhost:2000/?chartType=pie" readonly>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label class="col-2 col-form-label">Chart Iframe</label>
+                <div class="col-10 align-content-center">
+                    <input id="chart_url" class="form-control" type="text" placeholder="http://localhost:3000/?chartType=pie" readonly>
+                </div>
+            </div>
+        </div>
+        <script>
+            window.addEventListener("message", function(event) {
+                if(event.data.includes('chartType_')) {
+                    const chartType = event.data.replace('chartType_', '');
+                    const menu = document.getElementById('menu');
+                    const chart = document.getElementById('chart-container');
+                    const menuInput = document.getElementById('chart_url');
+                    const chartInput = document.getElementById('menu_url');
+                    menu.src = `http://localhost:2000/?chartType=${chartType}`
+                    chart.src = `http://localhost:3000/?chartType=${chartType}`
+                    menuInput.placeholder = `http://localhost:2000/?chartType=${chartType}`
+                    chartInput.placeholder = `http://localhost:3000/?chartType=${chartType}`
+                }
+            });
+        </script>
+    </body>
+</html>
+
